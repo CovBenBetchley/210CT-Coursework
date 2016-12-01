@@ -1,0 +1,106 @@
+//Ben Betchley
+
+//6. Write the pseudocode and code for a function that reverses the words in a sentence.Input:
+//"This is awesome" Output : "awesome is This"
+
+//The following code reverses a string, so that each word is reversed 
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+//origanally prints the string that will be reversed
+	char text[16] = "This is awesome";
+	cout << text << endl;
+//variables are created, length being the whole string, x being start and y being the end.
+	char length = 0;
+	char x;
+	char y;
+
+	while (text[length])
+		length++;
+//A while loop is used to reverse the entire string, x < y-- loops through seeing if the letter before is less than the y.
+	x = 0, y = length;
+
+	while (x < y--)
+	{
+		char a = text[x];
+		text[x++] = text[y];
+		text[y] = a;
+	}
+//now that all the elements are reversed, the individual letters in the words need to be reversed again. X is assigned back to 0.
+//This is done with while loops, looping through each letter adding the end letter to the word to the start.
+//while the character is not a space, keep looping, if it is a space, start the process again with the next word.
+	x = 0;
+	while (text[x])
+	{
+
+		while (text[x] == ' ')
+			x++;
+
+		y = x;
+		while (text[y] && text[y] != ' ')
+			y++;
+//Once all the string has been looped, the new positions are then stored in end. 
+		char end = y;
+//using the same while loop as before, reversing the string.
+		while (x < y--)
+		{
+			char a = text[x];
+			text[x++] = text[y];
+			text[y] = a;
+		}
+//y was the last point stored in end, now the while loop loops through again, and will therefore update end with x,
+//with the words reversed from the origanal sentance.
+		x = end;
+	}
+//the next string is now outputted underneith the origanal sentance.
+	cout << text << endl;
+	system("pause");
+	return 0;
+}
+
+//PSEUDOCODE
+/*
+MAIN
+TEXT <- "THIS IS AWESOME"
+OUTPUT = TEXT
+
+LENGTH <- 0, X , Y
+
+WHILE TEXT[LENGTH]
+	LENGTH + 1
+
+X <- 0 , Y <- LENGTH
+
+WHILE X < LENGTH - 1
+
+	A <- TEXT[X]
+	TEXT[X+1] <- TEXT[Y]
+	TEXT[Y] <- A
+
+X = 0
+
+WHILE TEXT[X]
+	
+	WHILE TEXT[X] = ' '
+		X+1
+	Y = X
+
+	WHILE TEXT[Y] AND TEXT[Y] IS NOT ' ' 
+		Y+1
+
+	END = y
+
+	WHILE X < LENGTH - 1
+
+	A <- TEXT[X]
+	TEXT[X+1] <- TEXT[Y]
+	TEXT[Y] <- A
+
+	X = END
+
+OUTPUT <- TEXT
+RETURN 0
+*/
