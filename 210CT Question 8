@@ -1,0 +1,89 @@
+//Ben Betchley
+
+//8. Write a recursive function (pseudocode and code) that removes all vowels from a given
+//string s.Input: "beautiful" Output : "btfl".
+
+//The following code uses three different functions, noSpace, Vowels and the main. The first function is used to replace a space
+//that would be created from the Vowels function when ever a vowel is found. The Vowels function iterates through the whole word
+//until the last value is met, if the word contains no more vowels, the word is then printed in the main function. The main takes
+//an inputted word from the user, which takes the origanal value of word.
+
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void noSpace(char *word)
+{
+//this function uses a pointer to the variable word, for loop loops through the word inputted until
+//the end of that word, for each time a space is not on the current letter, print the word.
+//function is used so that when a vowel is found from function Vowels, it will replace the vowels with
+//a space in the Vowels function. 
+
+	for (int i = 0; word[i] != '\0'; i++)
+	{
+		if (word[i] != ' ')
+		{
+			cout << word[i];
+		}
+	}
+}
+
+void Vowels(char *vowel, int pos)
+{
+//if the vowel position is not the end, call function noSpace.
+	if (vowel[pos] == '\0')
+	{
+		noSpace(vowel);
+	}
+	else
+//else it will check the word for any other the vowels, if there is it would replace it with a space here.
+//once the if statement has run, Vowels will be updated with the position + 1.
+	{
+		if (vowel[pos] == 'A' || vowel[pos] == 'E' || vowel[pos] == 'I' || vowel[pos] == 'O' || vowel[pos] == 'U'
+			|| vowel[pos] == 'a' || vowel[pos] == 'e' || vowel[pos] == 'i' || vowel[pos] == 'o' || vowel[pos] == 'u')
+		{
+			vowel[pos] = ' ';
+		}
+		Vowels(vowel, pos + 1);
+	}
+}
+
+int main()
+{
+//creates enough memory space so that word could have 100 characters.
+	char word[100];
+
+	cout << "Enter a word: ";
+	cin >> word;
+//calls the function Vowels to work out the inputted word with the vowels removed. 
+	Vowels(word, 0);
+
+	system("pause");
+	return 0;
+}
+
+//PSEUDOCODE
+/*
+NOSPACE( POINTER (WORD))
+
+FOR (I <- 0, WORD[I] NOT END, I+1
+	IF WORD[I] NOT ' '
+		OUTPUT <- WORD[I]
+
+VOWELS(POINTER (VOWEL), POSITION)
+IF VOWEL[POSITION] NOT END
+	NOSPACE(VOWEL)
+ELSE
+	IF VOWEL(POSITION) = A, E, I, O, U, a, e, i, o, u
+		VOWELS(POSITON) <- ' ' 
+	VOWELS(VOWEL, POSITION + 1
+
+MAIN
+WORD[]
+
+OUTPUT <- ENTER A WORD
+INPUT <- WORD
+VOWELS (WORD)
+*/
