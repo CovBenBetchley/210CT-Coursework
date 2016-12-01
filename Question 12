@@ -1,0 +1,106 @@
+//Ben Betchley
+
+//Question 12 . Implement TREE_SORT algorithm in a language of your choice, but make sure that the
+//INORDER function is implemented iteratively.
+
+//The objective of this code was to implement the in_order function iteratively instead of recursively.
+
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+class BinTreeNode {
+public:
+	BinTreeNode(int value) {
+		this->value = value;
+		this->left = NULL;
+		this->right = NULL;
+	}
+	int value;
+	BinTreeNode* left;
+	BinTreeNode* right;
+
+};
+
+BinTreeNode* tree_insert(BinTreeNode* tree, int item) {
+	if (tree == NULL)
+		tree = new BinTreeNode(item);
+	else
+		if (item < tree->value)
+			if (tree->left == NULL)
+				tree->left = new BinTreeNode(item);
+			else
+				tree_insert(tree->left, item);
+		else
+			if (tree->right == NULL)
+				tree->right = new BinTreeNode(item);
+			else
+				tree_insert(tree->right, item);
+	return tree;
+
+}
+
+void postorder(BinTreeNode* tree) {
+	if (tree->left != NULL)
+		postorder(tree->left);
+	if (tree->right != NULL)
+		postorder(tree->right);
+	cout << tree->value << endl;
+
+}
+
+void in_order(BinTreeNode* tree)
+{
+//first the stack is created for the tree, using popping and pushing to remove and add nodes.
+	stack <BinTreeNode*> node;
+//current node is recorded and stored. 
+	BinTreeNode *currentNode = tree;
+//while loop until the stack is empty or the current node is NULL.
+	while (!node.empty() || currentNode != NULL)
+//if the current node is not null, push the current node to the stack and the current node goes to
+//the left of the previous current node.
+		if (currentNode != NULL)
+		{
+			node.push(currentNode);
+			currentNode = currentNode->left;
+//else if the stack is not empty, point to the top of the stack, pop the top node out of the stack,
+//and print the current nodes value. Then point to the right of the tree if larger element.
+		}
+		else if (!node.empty())
+		{
+			currentNode = node.top();
+			node.pop();
+			cout << currentNode->value << endl;
+			currentNode = currentNode->right;
+		}
+//else break the loop and continue the program.
+		else
+		{
+			break;
+		}
+
+}
+
+/*void in_order(BinTreeNode* tree) {
+	if (tree->left != NULL)
+		in_order(tree->left);
+	cout << tree->value << endl;
+	if (tree->right != NULL)
+		in_order(tree->right);
+
+}*/
+
+int main(int argc, char *argv[])
+{
+	BinTreeNode* t = tree_insert(0, 6);
+	tree_insert(t, 10);
+	tree_insert(t, 5);
+	tree_insert(t, 2);
+	tree_insert(t, 3);
+	tree_insert(t, 4);
+	tree_insert(t, 11);
+	in_order(t);
+	system("pause");
+	return 0;
+}
