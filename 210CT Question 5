@@ -1,0 +1,43 @@
+//Ben Betchley
+
+//Question 5
+
+//Write the pseudocode corresponding to functions for addition, subtraction and
+//multiplication of two matrices, and then compute A=B*C –2*(B+C), where B and C are two
+//quadratic matrices of order n. What is the run-time?
+
+Pseudocode for A=B*C –2*(B+C)
+
+
+A1 <- ADDITION_MATRIX (B+C)
+	MATRIX <- []
+	FOR a IN range(LENGTH_MATRIX [X])
+		ADD [] TO MATRIX
+		FOR b IN range(LENGTH_MATRIX [Y])
+			ADD X[a][b] + Y[a][b] TO MATRIX[i]
+
+Big O Notation = O(N*N)
+
+	
+
+A2 <- MULTIPLICATION_MATRIX (B*C)
+	MATRIX <- []
+	FOR a IN range(LENGTH_MATRIX [X])
+	ADD [] TO MATRIX
+		FOR b IN range(LENGTH_MATRIX [Y])
+			ADD 0 TO MATRIX[a]
+			FOR c IN range(LENGTH_MATRIX [Y])	
+				MATRIX <- MATRIX + (X[a][c] - Y[c][b]
+
+Big O Notation = O(N*N*N)
+
+
+A <- SUBTRACTION_MATRIX (A2-A1)
+	MATRIX <- []
+	FOR a IN range(LENGTH_MATRIX [X])
+		ADD [] TO MATRIX
+		FOR b IN range(LENGTH_MATRIX [Y])
+			ADD X[a][b] - Y[a][b] TO MATRIX[i]
+
+Big O Notation = O(N*N)
+
