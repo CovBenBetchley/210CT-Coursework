@@ -1,0 +1,53 @@
+//Ben Betchley
+//3. Write the pseudocode for a function which returns the highest perfect square which is less
+//or equal to its parameter(a positive integer).Implement this in a programming language of
+//your choice.
+
+//The following code takes two variables, number and result. The user can input a number 
+//and the result will take the sqaure root of this number. If the result times itself is the
+//origanal number, is will be a perfect square, else it will not equal the number. If so a message
+//will be output saying this is not a perfect square, however, the result*result is a perfect square.
+
+
+#include <iostream>
+#include <cmath>  
+
+using namespace std;
+
+int main() {
+
+	{
+//Two variables, number and result, number takes the value of the inputted number by a user.
+		int number;
+		int result;
+
+		cout << "enter a number: " << endl;
+		cin >> number;
+//The result equals the square root of the number inputted.
+		result = (sqrt(number));
+//If statement - if the result times itself is number, then it is square.
+		if (result * result == number)
+		{
+			cout << "This number is a perfect square" << endl;
+		}
+//Else the result will not equal number, therefore output closest perfect square using result*result.
+		else
+		{
+
+			cout << "Your number " << number << " , is not a perfect square, nearest square is: " << result * result << endl;
+		}
+
+		system("pause");
+		return 0;
+
+	}
+}
+
+//PSEUDOCODE
+
+//PERFECT_SQUARE(N)
+//square = SQUAREROOT(N)
+//IF(Square ^ 2 = N)
+//OUTPUT <- "This is a perfect square"
+//ELSE
+//OUTPUT <- "This number " & N & "But perfect square is " & square ^ 2
