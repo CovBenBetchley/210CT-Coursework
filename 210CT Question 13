@@ -1,0 +1,133 @@
+//Ben Betchley
+
+//13. Write the pseudocode for an unweighted graph data structure. You either use an adjacency
+//matrix or an adjacency list approach.Also, write a function to add a new node and a
+//function to add an edge.Following that, implement the graph you have designed in the
+//programming language of your choice.You may use your own linked list from previous labs,
+//the STL LL, or use a simple fixed size array(10 elements would be fine).
+
+//Program to create a unweighted graph data structure, with an add node and add vertex 
+//function and add vertex function to be able to add new nodes to a new graph.
+
+#include <iostream>
+using namespace std; 
+//create a class holding all the variables and functions to create the graph.
+class graph
+{
+public:
+//create the graph 10 by 10 nodes.
+	int nodeCount;
+	bool adMatrix[10][10];
+//create a constructor which runs whenever a new instance is made.
+		graph(int nodeCount)
+		{
+//for loop to create the graph of 0's a being row, b being column.
+			this->nodeCount = nodeCount;
+			for (int a = 0; a < 10; a++)
+			{
+				for (int b = 0; b < 10; b++) 
+				{
+					adMatrix[a][b] = 0;
+				}
+			}
+		}
+//vertex takes the parameter i, if i is less than the node count cause error, else make
+//the nodecount the value of i.
+		void addVertex(int i)
+		{
+			if (i < nodeCount)
+			{
+				cout << "Error" << endl;
+			}
+			else
+			{
+				nodeCount = i;
+			}
+//addEdge takes two values a and b, both being seperate nodes.
+		}
+		void addEdge(int a, int b)
+		{
+//checks if nodes are within the graph, creates a relationship between a and b.
+			if (a >= 0 && a < nodeCount && b > 0 && b < nodeCount)
+			{
+				this->adMatrix[a][b] = true;
+				this->adMatrix[b][a] = true;
+			}
+		}
+//function to print the row then column.
+		void printGraph()
+		{
+			for (int a = 0; a < nodeCount; a++)
+			{
+				for (int b = 0; b < nodeCount; b++)
+				{
+					cout << adMatrix[a][b] << " ";
+				}
+				cout << endl;
+			}
+		}
+//deconstructor used to delete the memory of the class.
+		~graph()
+		{
+
+		}
+};
+//creates a new instance of the graph which takes in 5 nodes.
+int main()
+{
+//creates an edge for the first instance and prints the graph.
+	graph *g = new graph(5);
+	g->addEdge(0, 1);
+	g->printGraph();
+	cout << endl;
+//creates a vertex of 6 for the second instance, and a new edge
+//and prints the graph.
+	g->addVertex(6);
+	g->addEdge(0, 5);
+	g->printGraph();
+	delete g;
+	
+
+	system("pause");
+	return 0;
+}
+
+/*
+Pseudocode
+
+CLASS GRAPH
+
+	NODE_COUNT
+	ADJACENCY_MATRIX [10][10]
+---CONSTRUCTOR
+	GRAPH(NODECOUNT)
+	FOR(a<-0, a < 10, a+1)
+		FOR(b<-0, b < 10, b+1)
+			ADJACENCY_MATRIX
+
+	ADD_VERTEX(i)
+		IF(i < NODE_COUNT)
+			OUTPUT <- "ERROR"
+		ELSE
+			NODE_COUNT <- i
+
+	ADD_EDGE(a, b)
+		IF (a >= 0 AND a < NODE_COUNT AND b > 0 AND b < NODE_COUNT)
+			ADJACENCY_MATRIX[a][b] <-TRUE
+			ADJACENCY_MATRIX[b][a] <-TRUE
+
+	PRINT_GRAPH()
+		FOR(a <- 0, a <NODE_COUNT, a+1)
+			FOR(b <- 0, b <NODE_COUNT, b+1)
+				OUTPUT <- ADJACENCY_MATRIX[a][b]
+
+---DECONSTRUCTOR
+	GRAPH()
+
+	MAIN
+	GRAPH = NEW GRAPH()
+	GRAPH -> ADD_EDGE()
+	GRAPH -> ADD_VERTEX()
+	GRAPH -> PRINT_GRAPH()
+	DELETE GRAPH
+*/
